@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.test.pexels.data.model.collection.FeaturedCollection
 import com.test.pexels.data.model.photo.Photo
 import com.test.pexels.di.Dagger
+import com.test.pexels.utils.Pagination
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -38,8 +39,10 @@ class MainPageViewModel: ViewModel() {
     val isLoading by mIsLoading
     val isError by mIsError
     val featuredCollection = mutableStateListOf<FeaturedCollection>()
-    val defaultPhotos = mutableStateListOf<Photo>()
-    val queriedPhotos = mutableStateListOf<Photo>()
+    val defaultPagination = object : Pagination<Photo>() {
+        override fun loadLimit() = 10
+        override suspend fun initLoadPage(page: Int) = pexelsRepository.getDefaultPagination(page)
+    }
 
     init { init() }
 
@@ -68,9 +71,8 @@ class MainPageViewModel: ViewModel() {
         mSearchQuery.value = collection.title
         viewModelScope.launch(exceptionHandler) {
             mIsLoading.value = true
-            pexelsRepository.getPhotosByCollection(collection.id).also {
-                queriedPhotos.clear()
-                queriedPhotos.addAll(it)
+            defaultPagination.reload {
+                pexelsRepository.getPageByCollection(collection.id, it)
             }
             delay(1000)
             successQuery()
@@ -83,9 +85,6 @@ class MainPageViewModel: ViewModel() {
             if(featuredCollection.isEmpty()) async {
                 featuredCollection.addAll(pexelsRepository.getFeaturedCollections())
             }
-            if(defaultPhotos.isEmpty()) async {
-                defaultPhotos.addAll(pexelsRepository.getDefaultPhotos())
-            }
             delay(1000)
             successQuery()
         }
@@ -93,14 +92,13 @@ class MainPageViewModel: ViewModel() {
 
     private fun updateList() {
         if(searchQuery.isEmpty()) {
-            queriedPhotos.clear()
+            defaultPagination.reload()
             mIsLoading.value = false
         }
         else {
             viewModelScope.launch(exceptionHandler) {
-                pexelsRepository.getPhotosByQuery(searchQuery).also {
-                    queriedPhotos.clear()
-                    queriedPhotos.addAll(it)
+                defaultPagination.reload {
+                    pexelsRepository.getPageByQuery(searchQuery, it)
                 }
                 delay(1000)
                 successQuery()

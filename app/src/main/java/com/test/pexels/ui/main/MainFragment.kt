@@ -3,6 +3,7 @@ package com.test.pexels.ui.main
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
+import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -239,7 +241,7 @@ class MainFragment : BaseFragment() {
             // Main pagination
             Crossfade(
                 targetState = viewModel.run {
-                    isError || (searchQuery.isNotEmpty() && queriedPhotos.isEmpty() && !isLoading)
+                    isError || (searchQuery.isNotEmpty() && defaultPagination.size <= 0 && !isLoading)
                 },
                 label = ""
             ) {
@@ -289,26 +291,22 @@ class MainFragment : BaseFragment() {
                     }
                 } else {
                     LazyVerticalStaggeredGrid(
+                        state = rememberLazyStaggeredGridState().also {
+                            if(viewModel.defaultPagination.size == 0) rememberCoroutineScope().launch {
+                                it.scrollToItem(0)
+                            }
+                        },
                         columns = StaggeredGridCells.Adaptive(150.dp),
                         verticalItemSpacing = 16.dp,
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         contentPadding = PaddingValues(horizontal = 24.dp),
                         modifier = Modifier.fillMaxSize()
                     ) {
-                        if(viewModel.queriedPhotos.isNotEmpty()) {
-                            items(viewModel.queriedPhotos) {
-                                MainPhotoItem(
-                                    photo = it,
-                                    modifier = Modifier.animateItemPlacement()
-                                )
-                            }
-                        } else {
-                            items(viewModel.defaultPhotos) {
-                                MainPhotoItem(
-                                    photo = it,
-                                    modifier = Modifier.animateItemPlacement()
-                                )
-                            }
+                        items(viewModel.defaultPagination.size) {
+                            MainPhotoItem(
+                                photo = viewModel.defaultPagination[it],
+                                modifier = Modifier.animateItemPlacement()
+                            )
                         }
                     }
                 }

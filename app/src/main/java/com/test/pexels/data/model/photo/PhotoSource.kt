@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity
-open class PhotoSource (
+data class PhotoSource (
     @PrimaryKey(autoGenerate = true) val scrId : Int? = null,
     @SerializedName("original") val original : String,
     @SerializedName("large2x") val large2x : String,

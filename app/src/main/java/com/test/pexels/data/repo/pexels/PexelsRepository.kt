@@ -3,13 +3,13 @@ package com.test.pexels.data.repo.pexels
 import android.content.Context
 import androidx.room.Room
 import com.test.pexels.data.api.PexelsApi
+import com.test.pexels.data.model.BasePaginationPage
 import com.test.pexels.data.model.photo.Photo
 import com.test.pexels.data.retrofit.Retrofit
 import com.test.pexels.data.retrofit.bodyOrError
 import com.test.pexels.data.room.AppDatabase
 import com.test.pexels.data.room.dao.PhotoDao
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class PexelsRepository(context : Context) : IPexelsRepository {
@@ -26,16 +26,24 @@ class PexelsRepository(context : Context) : IPexelsRepository {
         pexelsApi.getFeaturedCollections().bodyOrError().values
     }
 
-    override suspend fun getDefaultPhotos() = withContext(Dispatchers.IO) {
-        pexelsApi.getDefaultPhotos().bodyOrError().values
+    override suspend fun getDefaultPagination(page: Int) = withContext(Dispatchers.IO) {
+        pexelsApi.getDefaultPhotos(page).bodyOrError()
     }
 
     override suspend fun getPhotosByQuery(query: String) = withContext(Dispatchers.IO) {
         pexelsApi.searchPhoto(query).bodyOrError().values
     }
 
+    override suspend fun getPageByQuery(query: String, page: Int) = withContext(Dispatchers.IO) {
+        pexelsApi.searchPhoto(query, page).bodyOrError()
+    }
+
     override suspend fun getPhotosByCollection(collectionId: String) = withContext(Dispatchers.IO) {
         pexelsApi.getPhotosByCollection(collectionId).bodyOrError().values
+    }
+
+    override suspend fun getPageByCollection(collectionId: String, page: Int) = withContext(Dispatchers.IO) {
+        pexelsApi.getPhotosByCollection(collectionId, page).bodyOrError()
     }
 
     override suspend fun addBookmark(photo: Photo) = withContext(Dispatchers.IO) {

@@ -16,8 +16,8 @@ interface PexelsApi {
 
     @GET("curated")
     fun getDefaultPhotos(
-        @Query("per_page") size : Int = 30,
-        @Query("page") page : Int = 0
+        @Query("page") page : Int = 0,
+        @Query("per_page") size : Int = 30
     ) : Call<BasePaginationPage<Photo>>
 
     @GET("search")

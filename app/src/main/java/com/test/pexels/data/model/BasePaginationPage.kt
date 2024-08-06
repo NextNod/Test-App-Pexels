@@ -8,9 +8,9 @@ data class BasePaginationPage<T> (
         alternate = [ "collections", "media" ]
     ) val values : List<T> = listOf(),
 
-    @SerializedName("page") val page : Int? = null,
+    @SerializedName("page") val page : Int,
     @SerializedName("per_page") val perPage : Int? = null,
-    @SerializedName("total_results") val totalResults : Int? = null,
+    @SerializedName("total_results") val totalResults : Int,
     @SerializedName("next_page") val nextPage : String? = null,
     @SerializedName("prev_page") val prevPage : String? = null
 )

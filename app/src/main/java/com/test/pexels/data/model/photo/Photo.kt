@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity
-open class Photo(
+data class Photo(
     @SerializedName("id") @PrimaryKey val id : Int,
     @SerializedName("width") val width : Int,
     @SerializedName("height") val height : Int,
