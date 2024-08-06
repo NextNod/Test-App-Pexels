@@ -1,0 +1,74 @@
+[versions]
+agp = "8.5.1"
+cicerone = "7.1"
+coreSplashscreen = "1.2.0-alpha01"
+glide-compose = "1.0.0-beta01"
+gson = "2.9.0"
+dagger = "2.51.1"
+dexter = "6.2.3"
+glide = "4.16.0"
+kotlin = "2.0.0"
+coreKtx = "1.13.1"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+appcompat = "1.7.0"
+viewModel-compose = "2.8.4"
+okhttp-logger = "4.3.1"
+material = "1.12.0"
+retrofit = "2.9.0"
+room = "2.6.1"
+
+[libraries]
+
+# Compose
+androidx-compose-ui = { module = "androidx.compose.ui:ui" }
+androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
+androidx-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewModel-compose" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
+androidx-compose-livedata = { module = "androidx.compose.runtime:runtime-livedata" }
+androidx-compose-rxjava2 = { module = "androidx.compose.runtime:runtime-rxjava2" }
+
+# Room
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-rxjava2 = { module = "androidx.room:room-rxjava2", version.ref = "room" }
+androidx-room-rxjava3 = { module = "androidx.room:room-rxjava3", version.ref = "room" }
+androidx-room-guava = { module = "androidx.room:room-guava", version.ref = "room" }
+androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+
+# Cicerone (Navigation)
+cicerone = { module = "com.github.terrakok:cicerone", version.ref = "cicerone" }
+
+# Dagger
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+
+# Dexter (Permission)
+dexter = { module = "com.karumi:dexter", version.ref = "dexter" }
+
+# Glide
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide-compose = { module = "com.github.bumptech.glide:compose", version.ref = "glide-compose" }
+
+# Core
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+# Retrofit
+retrofit2-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit2-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "gson" }
+okhttp3-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp-logger" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrains-kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

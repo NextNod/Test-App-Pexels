@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Pexels</string>
+    <string name="download">Download</string>
+    <string name="search">Search</string>
+    <string name="try_again">Try Again</string>
+    <string name="no_results">No results found</string>
+    <string name="explore">Explore</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="no_bookmarks">You haven\'t saved anything yet</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pexels</string>
+    <string name="download">Загрузить</string>
+    <string name="search">Поиск</string>
+    <string name="try_again">Попробовать снова</string>
+    <string name="no_results">Результат не найден</string>
+    <string name="explore">Explore</string>
+    <string name="bookmarks">Закладки</string>
+    <string name="no_bookmarks">У вас еще нет закладок</string>
+</resources>
