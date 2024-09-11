@@ -2,13 +2,13 @@ package com.test.pexels.data.repo.pexels
 
 import android.content.Context
 import androidx.room.Room
-import com.test.pexels.data.api.PexelsApi
-import com.test.pexels.data.model.BasePaginationPage
-import com.test.pexels.data.model.photo.Photo
-import com.test.pexels.data.retrofit.Retrofit
-import com.test.pexels.data.retrofit.bodyOrError
-import com.test.pexels.data.room.AppDatabase
-import com.test.pexels.data.room.dao.PhotoDao
+import com.test.pexels.data.source.remote.PexelsApi
+import com.test.pexels.domain.models.photo.Photo
+import com.test.pexels.data.source.remote.retrofit.Retrofit
+import com.test.pexels.data.source.remote.retrofit.bodyOrError
+import com.test.pexels.data.source.local.AppDatabase
+import com.test.pexels.data.source.local.dao.PhotoDao
+import com.test.pexels.domain.repo.IPexelsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

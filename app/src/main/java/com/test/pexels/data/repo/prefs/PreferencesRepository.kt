@@ -2,6 +2,7 @@ package com.test.pexels.data.repo.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.test.pexels.domain.repo.IPreferencesRepository
 
 class PreferencesRepository(context: Context) : IPreferencesRepository {
 
